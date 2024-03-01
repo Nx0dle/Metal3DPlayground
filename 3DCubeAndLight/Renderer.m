@@ -144,13 +144,6 @@ static const SimpleVertex3D cubeVertices[] = {
                 NSLog(@"Error creating texture %@", error.localizedDescription);
             }
         }
-
-#pragma mark-
-#pragma mark Create cube and trans buffer
-        
-        cubeVertexBuffer = [_device newBufferWithLength:sizeof(cubeVertices) options:MTLResourceStorageModeShared];
-        
-        transformationBuffer = [_device newBufferWithLength:sizeof(TransformationData) options:MTLResourceStorageModeShared];
         
 #pragma mark -
 #pragma mark Set up command queue

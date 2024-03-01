@@ -26,15 +26,14 @@ struct SimplePipelineRasterizerData
 // Vertex shader which passes position and color through to rasterizer.
 vertex SimplePipelineRasterizerData
 simpleVertexShader(const uint vertexID [[ vertex_id ]],
-                   const device SimpleVertex *vertices [[ buffer(VertexInputIndexVertices) ]])
+                   const device SimpleVertex3D *vertices [[ buffer(VertexInputIndexVertices) ]])
 {
     SimplePipelineRasterizerData out;
 
     out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
-    out.position.xy = vertices[vertexID].position.xy;
+    out.position.xyz = vertices[vertexID].position.xyz;
 
     out.color = vertices[vertexID].color;
-    out.pos = vertices[vertexID].position.xy;
     
     return out;
 }
@@ -61,10 +60,27 @@ struct TexturePipelineRasterizerData
 // Vertex shader which adjusts positions by an aspect ratio and passes texture
 // coordinates through to the rasterizer.
 vertex TexturePipelineRasterizerData
+textureVertexShader3D(const uint vertexID [[ vertex_id ]],
+                    const device TextureVertex3D *vertices [[ buffer(VertexInputIndexVertices) ]],
+                    constant float &aspectRatio [[ buffer(VertexInputIndexAspectRatio) ]])
+{
+    TexturePipelineRasterizerData out;
+
+    out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
+
+    out.position.x = vertices[vertexID].position.x;// * aspectRatio;
+    out.position.y = vertices[vertexID].position.y;
+    out.position.z = vertices[vertexID].position.z;
+
+    out.texcoord = vertices[vertexID].texcoord;
+
+    return out;
+}
+
+vertex TexturePipelineRasterizerData
 textureVertexShader(const uint vertexID [[ vertex_id ]],
                     const device TextureVertex *vertices [[ buffer(VertexInputIndexVertices) ]],
-                    constant float &aspectRatio [[ buffer(VertexInputIndexAspectRatio) ]],
-                    constant Uniforms & uniforms [[ buffer(3) ]])
+                    constant float &aspectRatio [[ buffer(VertexInputIndexAspectRatio) ]])
 {
     TexturePipelineRasterizerData out;
 
@@ -82,8 +98,7 @@ textureVertexShader(const uint vertexID [[ vertex_id ]],
 #pragma mark Render texture shader
 
 fragment float4 textureRender(TexturePipelineRasterizerData in [[stage_in]],
-                                    texture2d<float> texture [[texture(0)]],
-                              constant Uniforms &uniforms [[ buffer(3) ]]){
+                                    texture2d<float> texture [[texture(0)]]){
  
     sampler simpleSampler;
     
