@@ -1,0 +1,587 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		05CEB4A22B91B48500926EEB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CEB4A12B91B48500926EEB /* AppDelegate.m */; };
+		05CEB4A52B91B48500926EEB /* Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CEB4A42B91B48500926EEB /* Renderer.m */; };
+		05CEB4A82B91B48500926EEB /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CEB4A72B91B48500926EEB /* GameViewController.m */; };
+		05CEB4AA2B91B48500926EEB /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 05CEB4A92B91B48500926EEB /* Shaders.metal */; };
+		05CEB4AD2B91B48700926EEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05CEB4AC2B91B48700926EEB /* Assets.xcassets */; };
+		05CEB4B02B91B48700926EEB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05CEB4AE2B91B48700926EEB /* Main.storyboard */; };
+		05CEB4B22B91B48700926EEB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CEB4B12B91B48700926EEB /* main.m */; };
+		05CEB4BD2B91B48700926EEB /* _DCubeAndLightTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CEB4BC2B91B48700926EEB /* _DCubeAndLightTests.m */; };
+		05CEB4C72B91B48700926EEB /* _DCubeAndLightUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CEB4C62B91B48700926EEB /* _DCubeAndLightUITests.m */; };
+		05CEB4C92B91B48700926EEB /* _DCubeAndLightUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CEB4C82B91B48700926EEB /* _DCubeAndLightUITestsLaunchTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		05CEB4B92B91B48700926EEB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05CEB4952B91B48500926EEB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 05CEB49C2B91B48500926EEB;
+			remoteInfo = 3DCubeAndLight;
+		};
+		05CEB4C32B91B48700926EEB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05CEB4952B91B48500926EEB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 05CEB49C2B91B48500926EEB;
+			remoteInfo = 3DCubeAndLight;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		05CEB49D2B91B48500926EEB /* 3DCubeAndLight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 3DCubeAndLight.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		05CEB4A02B91B48500926EEB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		05CEB4A12B91B48500926EEB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		05CEB4A32B91B48500926EEB /* Renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
+		05CEB4A42B91B48500926EEB /* Renderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Renderer.m; sourceTree = "<group>"; };
+		05CEB4A62B91B48500926EEB /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		05CEB4A72B91B48500926EEB /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		05CEB4A92B91B48500926EEB /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		05CEB4AB2B91B48500926EEB /* ShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
+		05CEB4AC2B91B48700926EEB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		05CEB4AF2B91B48700926EEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		05CEB4B12B91B48700926EEB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		05CEB4B32B91B48700926EEB /* _DCubeAndLight.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = _DCubeAndLight.entitlements; sourceTree = "<group>"; };
+		05CEB4B82B91B48700926EEB /* 3DCubeAndLightTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 3DCubeAndLightTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		05CEB4BC2B91B48700926EEB /* _DCubeAndLightTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _DCubeAndLightTests.m; sourceTree = "<group>"; };
+		05CEB4C22B91B48700926EEB /* 3DCubeAndLightUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 3DCubeAndLightUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		05CEB4C62B91B48700926EEB /* _DCubeAndLightUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _DCubeAndLightUITests.m; sourceTree = "<group>"; };
+		05CEB4C82B91B48700926EEB /* _DCubeAndLightUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _DCubeAndLightUITestsLaunchTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		05CEB49A2B91B48500926EEB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05CEB4B52B91B48700926EEB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05CEB4BF2B91B48700926EEB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		05CEB4942B91B48500926EEB = {
+			isa = PBXGroup;
+			children = (
+				05CEB49F2B91B48500926EEB /* 3DCubeAndLight */,
+				05CEB4BB2B91B48700926EEB /* 3DCubeAndLightTests */,
+				05CEB4C52B91B48700926EEB /* 3DCubeAndLightUITests */,
+				05CEB49E2B91B48500926EEB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		05CEB49E2B91B48500926EEB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				05CEB49D2B91B48500926EEB /* 3DCubeAndLight.app */,
+				05CEB4B82B91B48700926EEB /* 3DCubeAndLightTests.xctest */,
+				05CEB4C22B91B48700926EEB /* 3DCubeAndLightUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		05CEB49F2B91B48500926EEB /* 3DCubeAndLight */ = {
+			isa = PBXGroup;
+			children = (
+				05CEB4A02B91B48500926EEB /* AppDelegate.h */,
+				05CEB4A12B91B48500926EEB /* AppDelegate.m */,
+				05CEB4A32B91B48500926EEB /* Renderer.h */,
+				05CEB4A42B91B48500926EEB /* Renderer.m */,
+				05CEB4A62B91B48500926EEB /* GameViewController.h */,
+				05CEB4A72B91B48500926EEB /* GameViewController.m */,
+				05CEB4A92B91B48500926EEB /* Shaders.metal */,
+				05CEB4AB2B91B48500926EEB /* ShaderTypes.h */,
+				05CEB4AC2B91B48700926EEB /* Assets.xcassets */,
+				05CEB4AE2B91B48700926EEB /* Main.storyboard */,
+				05CEB4B12B91B48700926EEB /* main.m */,
+				05CEB4B32B91B48700926EEB /* _DCubeAndLight.entitlements */,
+			);
+			path = 3DCubeAndLight;
+			sourceTree = "<group>";
+		};
+		05CEB4BB2B91B48700926EEB /* 3DCubeAndLightTests */ = {
+			isa = PBXGroup;
+			children = (
+				05CEB4BC2B91B48700926EEB /* _DCubeAndLightTests.m */,
+			);
+			path = 3DCubeAndLightTests;
+			sourceTree = "<group>";
+		};
+		05CEB4C52B91B48700926EEB /* 3DCubeAndLightUITests */ = {
+			isa = PBXGroup;
+			children = (
+				05CEB4C62B91B48700926EEB /* _DCubeAndLightUITests.m */,
+				05CEB4C82B91B48700926EEB /* _DCubeAndLightUITestsLaunchTests.m */,
+			);
+			path = 3DCubeAndLightUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		05CEB49C2B91B48500926EEB /* 3DCubeAndLight */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05CEB4CC2B91B48700926EEB /* Build configuration list for PBXNativeTarget "3DCubeAndLight" */;
+			buildPhases = (
+				05CEB4992B91B48500926EEB /* Sources */,
+				05CEB49A2B91B48500926EEB /* Frameworks */,
+				05CEB49B2B91B48500926EEB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = 3DCubeAndLight;
+			productName = 3DCubeAndLight;
+			productReference = 05CEB49D2B91B48500926EEB /* 3DCubeAndLight.app */;
+			productType = "com.apple.product-type.application";
+		};
+		05CEB4B72B91B48700926EEB /* 3DCubeAndLightTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05CEB4CF2B91B48700926EEB /* Build configuration list for PBXNativeTarget "3DCubeAndLightTests" */;
+			buildPhases = (
+				05CEB4B42B91B48700926EEB /* Sources */,
+				05CEB4B52B91B48700926EEB /* Frameworks */,
+				05CEB4B62B91B48700926EEB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				05CEB4BA2B91B48700926EEB /* PBXTargetDependency */,
+			);
+			name = 3DCubeAndLightTests;
+			productName = 3DCubeAndLightTests;
+			productReference = 05CEB4B82B91B48700926EEB /* 3DCubeAndLightTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		05CEB4C12B91B48700926EEB /* 3DCubeAndLightUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05CEB4D22B91B48700926EEB /* Build configuration list for PBXNativeTarget "3DCubeAndLightUITests" */;
+			buildPhases = (
+				05CEB4BE2B91B48700926EEB /* Sources */,
+				05CEB4BF2B91B48700926EEB /* Frameworks */,
+				05CEB4C02B91B48700926EEB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				05CEB4C42B91B48700926EEB /* PBXTargetDependency */,
+			);
+			name = 3DCubeAndLightUITests;
+			productName = 3DCubeAndLightUITests;
+			productReference = 05CEB4C22B91B48700926EEB /* 3DCubeAndLightUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		05CEB4952B91B48500926EEB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					05CEB49C2B91B48500926EEB = {
+						CreatedOnToolsVersion = 15.2;
+					};
+					05CEB4B72B91B48700926EEB = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = 05CEB49C2B91B48500926EEB;
+					};
+					05CEB4C12B91B48700926EEB = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = 05CEB49C2B91B48500926EEB;
+					};
+				};
+			};
+			buildConfigurationList = 05CEB4982B91B48500926EEB /* Build configuration list for PBXProject "3DCubeAndLight" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 05CEB4942B91B48500926EEB;
+			productRefGroup = 05CEB49E2B91B48500926EEB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				05CEB49C2B91B48500926EEB /* 3DCubeAndLight */,
+				05CEB4B72B91B48700926EEB /* 3DCubeAndLightTests */,
+				05CEB4C12B91B48700926EEB /* 3DCubeAndLightUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		05CEB49B2B91B48500926EEB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05CEB4AD2B91B48700926EEB /* Assets.xcassets in Resources */,
+				05CEB4B02B91B48700926EEB /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05CEB4B62B91B48700926EEB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05CEB4C02B91B48700926EEB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		05CEB4992B91B48500926EEB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05CEB4B22B91B48700926EEB /* main.m in Sources */,
+				05CEB4AA2B91B48500926EEB /* Shaders.metal in Sources */,
+				05CEB4A52B91B48500926EEB /* Renderer.m in Sources */,
+				05CEB4A82B91B48500926EEB /* GameViewController.m in Sources */,
+				05CEB4A22B91B48500926EEB /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05CEB4B42B91B48700926EEB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05CEB4BD2B91B48700926EEB /* _DCubeAndLightTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05CEB4BE2B91B48700926EEB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05CEB4C72B91B48700926EEB /* _DCubeAndLightUITests.m in Sources */,
+				05CEB4C92B91B48700926EEB /* _DCubeAndLightUITestsLaunchTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		05CEB4BA2B91B48700926EEB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 05CEB49C2B91B48500926EEB /* 3DCubeAndLight */;
+			targetProxy = 05CEB4B92B91B48700926EEB /* PBXContainerItemProxy */;
+		};
+		05CEB4C42B91B48700926EEB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 05CEB49C2B91B48500926EEB /* 3DCubeAndLight */;
+			targetProxy = 05CEB4C32B91B48700926EEB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		05CEB4AE2B91B48700926EEB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05CEB4AF2B91B48700926EEB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		05CEB4CA2B91B48700926EEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		05CEB4CB2B91B48700926EEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		05CEB4CD2B91B48700926EEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = 3DCubeAndLight/_DCubeAndLight.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "abc.-DCubeAndLight";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		05CEB4CE2B91B48700926EEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = 3DCubeAndLight/_DCubeAndLight.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "abc.-DCubeAndLight";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		05CEB4D02B91B48700926EEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "abc.-DCubeAndLightTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/3DCubeAndLight.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/3DCubeAndLight";
+			};
+			name = Debug;
+		};
+		05CEB4D12B91B48700926EEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "abc.-DCubeAndLightTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/3DCubeAndLight.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/3DCubeAndLight";
+			};
+			name = Release;
+		};
+		05CEB4D32B91B48700926EEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "abc.-DCubeAndLightUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TEST_TARGET_NAME = 3DCubeAndLight;
+			};
+			name = Debug;
+		};
+		05CEB4D42B91B48700926EEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "abc.-DCubeAndLightUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TEST_TARGET_NAME = 3DCubeAndLight;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		05CEB4982B91B48500926EEB /* Build configuration list for PBXProject "3DCubeAndLight" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05CEB4CA2B91B48700926EEB /* Debug */,
+				05CEB4CB2B91B48700926EEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05CEB4CC2B91B48700926EEB /* Build configuration list for PBXNativeTarget "3DCubeAndLight" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05CEB4CD2B91B48700926EEB /* Debug */,
+				05CEB4CE2B91B48700926EEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05CEB4CF2B91B48700926EEB /* Build configuration list for PBXNativeTarget "3DCubeAndLightTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05CEB4D02B91B48700926EEB /* Debug */,
+				05CEB4D12B91B48700926EEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05CEB4D22B91B48700926EEB /* Build configuration list for PBXNativeTarget "3DCubeAndLightUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05CEB4D32B91B48700926EEB /* Debug */,
+				05CEB4D42B91B48700926EEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 05CEB4952B91B48500926EEB /* Project object */;
+}
