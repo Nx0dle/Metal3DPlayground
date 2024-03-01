@@ -1,53 +1,93 @@
-//
-//  Shaders.metal
-//  3DCubeAndLight
-//
-//  Created by MotionVFX on 01/03/2024.
-//
+/*
+See LICENSE folder for this sample’s licensing information.
 
-// File for Metal kernel and shader functions
+Abstract:
+Metal vertex and fragment shaders.
+*/
 
 #include <metal_stdlib>
-#include <simd/simd.h>
-
-// Including header shared between this Metal shader code and Swift/C code executing Metal API commands
-#import "ShaderTypes.h"
 
 using namespace metal;
 
-typedef struct
-{
-    float3 position [[attribute(VertexAttributePosition)]];
-    float2 texCoord [[attribute(VertexAttributeTexcoord)]];
-} Vertex;
+#include "ShaderTypes.h"
 
-typedef struct
+#pragma mark -
+
+#pragma mark - Shaders for simple pipeline used to render triangle to renderable texture
+
+// Vertex shader outputs and fragment shader inputs for simple pipeline
+struct SimplePipelineRasterizerData
 {
     float4 position [[position]];
-    float2 texCoord;
-} ColorInOut;
+    float4 color;
+    float2 pos;
+};
 
-vertex ColorInOut vertexShader(Vertex in [[stage_in]],
-                               constant Uniforms & uniforms [[ buffer(BufferIndexUniforms) ]])
+// Vertex shader which passes position and color through to rasterizer.
+vertex SimplePipelineRasterizerData
+simpleVertexShader(const uint vertexID [[ vertex_id ]],
+                   const device SimpleVertex *vertices [[ buffer(VertexInputIndexVertices) ]])
 {
-    ColorInOut out;
+    SimplePipelineRasterizerData out;
 
-    float4 position = float4(in.position, 1.0);
-    out.position = uniforms.projectionMatrix * uniforms.modelViewMatrix * position;
-    out.texCoord = in.texCoord;
+    out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
+    out.position.xy = vertices[vertexID].position.xy;
+
+    out.color = vertices[vertexID].color;
+    out.pos = vertices[vertexID].position.xy;
+    
+    return out;
+}
+
+// Fragment shader that just outputs color passed from rasterizer.
+fragment float4 simpleFragmentShader(SimplePipelineRasterizerData in [[stage_in]])
+{
+    return in.color;
+}
+
+#pragma mark -
+
+#pragma mark Shaders for pipeline used texture from renderable texture when rendering to the drawable.
+
+// Vertex shader outputs and fragment shader inputs for texturing pipeline.
+struct TexturePipelineRasterizerData
+{
+    float4 position [[position]];
+    float2 texcoord;
+};
+
+
+
+// Vertex shader which adjusts positions by an aspect ratio and passes texture
+// coordinates through to the rasterizer.
+vertex TexturePipelineRasterizerData
+textureVertexShader(const uint vertexID [[ vertex_id ]],
+                    const device TextureVertex *vertices [[ buffer(VertexInputIndexVertices) ]],
+                    constant float &aspectRatio [[ buffer(VertexInputIndexAspectRatio) ]],
+                    constant Uniforms & uniforms [[ buffer(3) ]])
+{
+    TexturePipelineRasterizerData out;
+
+    out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
+
+    out.position.x = vertices[vertexID].position.x;// * aspectRatio;
+    out.position.y = vertices[vertexID].position.y;
+
+    out.texcoord = vertices[vertexID].texcoord;
 
     return out;
 }
 
-fragment float4 fragmentShader(ColorInOut in [[stage_in]],
-                               constant Uniforms & uniforms [[ buffer(BufferIndexUniforms) ]],
-                               texture2d<half> colorMap     [[ texture(TextureIndexColor) ]])
-{
-    constexpr sampler colorSampler(mip_filter::linear,
-                                   mag_filter::linear,
-                                   min_filter::linear);
+#pragma mark -
+#pragma mark Render texture shader
 
-    half4 colorSample   = colorMap.sample(colorSampler, in.texCoord.xy);
-
-    return float4(colorSample);
+fragment float4 textureRender(TexturePipelineRasterizerData in [[stage_in]],
+                                    texture2d<float> texture [[texture(0)]],
+                              constant Uniforms &uniforms [[ buffer(3) ]]){
+ 
+    sampler simpleSampler;
+    
+    float4 colorSample = texture.sample(simpleSampler, in.texcoord);
+    
+    return colorSample;
 }

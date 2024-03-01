@@ -1,43 +1,58 @@
-//
-//  ShaderTypes.h
-//  3DCubeAndLight
-//
-//  Created by MotionVFX on 01/03/2024.
-//
+/*
+See LICENSE folder for this sample’s licensing information.
 
-//
-//  Header containing types and enum constants shared between Metal shaders and Swift/ObjC source
-//
-#ifndef ShaderTypes_h
-#define ShaderTypes_h
+Abstract:
+Header containing types and enum constants shared between Metal shaders
+ and Objective-C source.
+*/
 
-#ifdef __METAL_VERSION__
-#define NS_ENUM(_type, _name) enum _name : _type _name; enum _name : _type
-typedef metal::int32_t EnumBackingType;
-#else
-#import <Foundation/Foundation.h>
-typedef NSInteger EnumBackingType;
-#endif
+#ifndef AAPLShaderTypes_h
+#define AAPLShaderTypes_h
 
 #include <simd/simd.h>
 
-typedef NS_ENUM(EnumBackingType, BufferIndex)
+typedef enum AAPLVertexInputIndex
 {
-    BufferIndexMeshPositions = 0,
-    BufferIndexMeshGenerics  = 1,
-    BufferIndexUniforms      = 2
-};
+    VertexInputIndexVertices    = 0,
+    VertexInputIndexAspectRatio = 1,
+    kawaseIterator = 2,
+} VertexInputIndex;
 
-typedef NS_ENUM(EnumBackingType, VertexAttribute)
+typedef enum TextureInputIndex
 {
-    VertexAttributePosition  = 0,
-    VertexAttributeTexcoord  = 1,
-};
+    AAPLTextureInputIndexColor = 0,
+} TextureInputIndex;
 
-typedef NS_ENUM(EnumBackingType, TextureIndex)
+typedef struct
 {
-    TextureIndexColor    = 0,
-};
+    vector_float2 position;
+    vector_float4 color;
+} SimpleVertex;
+
+typedef struct
+{
+    vector_float2 position;
+    vector_float2 texcoord;
+} TextureVertex;
+
+typedef struct
+{
+    vector_float4 position;
+    vector_float4 color;
+} SimpleVertex3D;
+
+typedef struct
+{
+    vector_float4 position;
+    vector_float2 texcoord;
+} TextureVertex3D;
+
+typedef struct
+{
+    matrix_float4x4 modelMatrix;
+    matrix_float4x4 viewMatrix;
+    matrix_float4x4 perspectiveMatrix;
+} TransformationData;
 
 typedef struct
 {
@@ -45,5 +60,4 @@ typedef struct
     matrix_float4x4 modelViewMatrix;
 } Uniforms;
 
-#endif /* ShaderTypes_h */
-
+#endif /* AAPLShaderTypes_h */
