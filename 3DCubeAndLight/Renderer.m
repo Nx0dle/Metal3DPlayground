@@ -105,6 +105,8 @@ static const SimpleVertex3D cubeVertices[] = {
     
     float _rotationX;
     float _rotationY;
+    
+    float scaleZ;
 }
 
 #pragma mark -
@@ -234,7 +236,8 @@ static const SimpleVertex3D cubeVertices[] = {
     matrix_float4x4 modelMatrixY = matrix4x4_rotation(_rotationY, rotationAxisY);
     
     modelMatrix = matrix_multiply(modelMatrixX, modelMatrixY);
-    viewMatrix = matrix4x4_translation(0.0, 0.0, -3.0);
+    
+    viewMatrix = matrix4x4_translation(0.0, 0.0, -3.0 + scaleZ);
 
     modelViewMatrix = matrix_multiply(viewMatrix, modelMatrix);
     _rotation += 0.01;
@@ -246,6 +249,12 @@ static const SimpleVertex3D cubeVertices[] = {
     float mult = 0.01;
     _rotationX += posY * mult;
     _rotationY += posX * mult;
+}
+
+- (void) setTransformZWithScrollZ:(float)posY
+{
+    float mult = 0.1;
+    scaleZ += posY * mult;
 }
 
 // Handles view rendering for a new frame.

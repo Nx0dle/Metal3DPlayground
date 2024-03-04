@@ -44,4 +44,11 @@
     [_view setNeedsDisplay:YES];
 }
 
+- (void)scrollWheel:(NSEvent *)event
+{
+    printf("%s: %f\n", __func__, [event scrollingDeltaY]);
+    [_renderer setTransformZWithScrollZ:[event scrollingDeltaY]];
+    [_view setNeedsDisplay:YES];
+}
+
 @end
