@@ -20,18 +20,28 @@ struct SimplePipelineRasterizerData
 {
     float4 position [[position]];
     float4 color;
-    float2 pos;
+    float4 normalData;
+    float3 lightDirection;
 };
 
 // Vertex shader which passes position and color through to rasterizer.
 vertex SimplePipelineRasterizerData
 simpleVertexShader(const uint vertexID [[ vertex_id ]],
-                   const device SimpleVertex3D *vertices [[ buffer(VertexInputIndexVertices) ]])
+                   const device SimpleVertex3D *vertices [[ buffer(VertexInputIndexVertices) ]],
+                   constant matrix_float4x4 &_projectionMatrix [[buffer(1)]],
+                   constant matrix_float4x4 &modelViewMatrix [[buffer(2)]],
+                   constant matrix_float4x4 &modelMatrix [[buffer(3)]])
 {
     SimplePipelineRasterizerData out;
-
-    out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
-    out.position.xyz = vertices[vertexID].position.xyz;
+    
+    out.lightDirection = normalize(float3(0, 0, 1));
+    
+    float4 normalData = float4(vertices[vertexID].normal, 0.0);
+    
+    out.normalData = modelMatrix * normalData;
+    
+    float4 position = float4(vertices[vertexID].position.xyz, 1.0);
+    out.position = _projectionMatrix * modelViewMatrix * position;
 
     out.color = vertices[vertexID].color;
     
@@ -41,6 +51,14 @@ simpleVertexShader(const uint vertexID [[ vertex_id ]],
 // Fragment shader that just outputs color passed from rasterizer.
 fragment float4 simpleFragmentShader(SimplePipelineRasterizerData in [[stage_in]])
 {
+    float brightness = dot(in.normalData, float4(in.lightDirection, 0.0));
+    
+    float4 lightColor = float4(1, 1, 1, 1);
+    
+    float4 finalColor = in.color * lightColor * brightness;
+    
+    in.color = finalColor;
+    
     return in.color;
 }
 

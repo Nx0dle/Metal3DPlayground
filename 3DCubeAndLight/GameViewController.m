@@ -37,4 +37,9 @@
     _view.delegate = _renderer;
 }
 
+- (void)keyDown:(NSEvent *)event
+{
+    
+}
+
 @end

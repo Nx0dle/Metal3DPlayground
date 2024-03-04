@@ -1,11 +1,3 @@
-/*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-Implementation for a renderer class that performs Metal setup and
- per-frame rendering.
-*/
-
 @import MetalKit;
 
 #import "Renderer.h"
@@ -23,52 +15,52 @@ static const SimpleVertex triVertices[] = {
 
 static const SimpleVertex3D cubeVertices[] = {
     // Front face
-    {{-0.5, -0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{ 0.5, -0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{ 0.5,  0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{ 0.5,  0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{-0.5,  0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{-0.5, -0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
+    {{-0.5, -0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}, {0, 0, 1}},
+    {{ 0.5, -0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}, {0, 0, 1}},
+    {{ 0.5,  0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}, {0, 0, 1}},
+    {{ 0.5,  0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}, {0, 0, 1}},
+    {{-0.5,  0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}, {0, 0, 1}},
+    {{-0.5, -0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}, {0, 0, 1}},
 
     // Back face
-    {{ 0.5, -0.5, -0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{-0.5, -0.5, -0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{-0.5,  0.5, -0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{-0.5,  0.5, -0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{ 0.5,  0.5, -0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{ 0.5, -0.5, -0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
+    {{ 0.5, -0.5, -0.5, 1.0}, {1.0, 1.0, 0.0, 1.0}, {0, 0, -1}},
+    {{-0.5, -0.5, -0.5, 1.0}, {1.0, 1.0, 0.0, 1.0}, {0, 0, -1}},
+    {{-0.5,  0.5, -0.5, 1.0}, {1.0, 1.0, 0.0, 1.0}, {0, 0, -1}},
+    {{-0.5,  0.5, -0.5, 1.0}, {1.0, 1.0, 0.0, 1.0}, {0, 0, -1}},
+    {{ 0.5,  0.5, -0.5, 1.0}, {1.0, 1.0, 0.0, 1.0}, {0, 0, -1}},
+    {{ 0.5, -0.5, -0.5, 1.0}, {1.0, 1.0, 0.0, 1.0}, {0, 0, -1}},
 
     // Top face
-    {{-0.5,  0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{ 0.5,  0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{ 0.5,  0.5, -0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{ 0.5,  0.5, -0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{-0.5,  0.5, -0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{-0.5,  0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
+    {{-0.5,  0.5,  0.5, 1.0}, {1.0, 0.0, 1.0, 1.0}, {0, 1, 0}},
+    {{ 0.5,  0.5,  0.5, 1.0}, {1.0, 0.0, 1.0, 1.0}, {0, 1, 0}},
+    {{ 0.5,  0.5, -0.5, 1.0}, {1.0, 0.0, 1.0, 1.0}, {0, 1, 0}},
+    {{ 0.5,  0.5, -0.5, 1.0}, {1.0, 0.0, 1.0, 1.0}, {0, 1, 0}},
+    {{-0.5,  0.5, -0.5, 1.0}, {1.0, 0.0, 1.0, 1.0}, {0, 1, 0}},
+    {{-0.5,  0.5,  0.5, 1.0}, {1.0, 0.0, 1.0, 1.0}, {0, 1, 0}},
 
     // Bottom face
-    {{-0.5, -0.5, -0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{ 0.5, -0.5, -0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{ 0.5, -0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{ 0.5, -0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{-0.5, -0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{-0.5, -0.5, -0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
+    {{-0.5, -0.5, -0.5, 1.0}, {0.0, 1.0, 0.0, 1.0}, {0, -1, 0}},
+    {{ 0.5, -0.5, -0.5, 1.0}, {0.0, 1.0, 0.0, 1.0}, {0, -1, 0}},
+    {{ 0.5, -0.5,  0.5, 1.0}, {0.0, 1.0, 0.0, 1.0}, {0, -1, 0}},
+    {{ 0.5, -0.5,  0.5, 1.0}, {0.0, 1.0, 0.0, 1.0}, {0, -1, 0}},
+    {{-0.5, -0.5,  0.5, 1.0}, {0.0, 1.0, 0.0, 1.0}, {0, -1, 0}},
+    {{-0.5, -0.5, -0.5, 1.0}, {0.0, 1.0, 0.0, 1.0}, {0, -1, 0}},
 
     // Left face
-    {{-0.5, -0.5, -0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{-0.5, -0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{-0.5,  0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{-0.5,  0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{-0.5,  0.5, -0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{-0.5, -0.5, -0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
+    {{-0.5, -0.5, -0.5, 1.0}, {1.0, 1.0, 1.0, 1.0}, {-1, 0, 0}},
+    {{-0.5, -0.5,  0.5, 1.0}, {1.0, 1.0, 1.0, 1.0}, {-1, 0, 0}},
+    {{-0.5,  0.5,  0.5, 1.0}, {1.0, 1.0, 1.0, 1.0}, {-1, 0, 0}},
+    {{-0.5,  0.5,  0.5, 1.0}, {1.0, 1.0, 1.0, 1.0}, {-1, 0, 0}},
+    {{-0.5,  0.5, -0.5, 1.0}, {1.0, 1.0, 1.0, 1.0}, {-1, 0, 0}},
+    {{-0.5, -0.5, -0.5, 1.0}, {1.0, 1.0, 1.0, 1.0}, {-1, 0, 0}},
 
     // Right face
-    {{ 0.5, -0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{ 0.5, -0.5, -0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{ 0.5,  0.5, -0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{ 0.5,  0.5, -0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{ 0.5,  0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
-    {{ 0.5, -0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}},
+    {{ 0.5, -0.5,  0.5, 1.0}, {0.0, 1.0, 1.0, 1.0}, {1, 0, 0}},
+    {{ 0.5, -0.5, -0.5, 1.0}, {0.0, 1.0, 1.0, 1.0}, {1, 0, 0}},
+    {{ 0.5,  0.5, -0.5, 1.0}, {0.0, 1.0, 1.0, 1.0}, {1, 0, 0}},
+    {{ 0.5,  0.5, -0.5, 1.0}, {0.0, 1.0, 1.0, 1.0}, {1, 0, 0}},
+    {{ 0.5,  0.5,  0.5, 1.0}, {0.0, 1.0, 1.0, 1.0}, {1, 0, 0}},
+    {{ 0.5, -0.5,  0.5, 1.0}, {0.0, 1.0, 1.0, 1.0}, {1, 0, 0}},
 };
 
 #pragma mark-
@@ -100,11 +92,16 @@ static const SimpleVertex3D cubeVertices[] = {
     id<MTLCommandQueue> _commandQueue;
     
     id<MTLBuffer> cubeVertexBuffer;
-    id<MTLBuffer> transformationBuffer;
     
-    matrix_float4x4 _projectionMatrix;
+    id<MTLBuffer> mvpUniform;
     
     float _rotation;
+    
+    matrix_float4x4 _projectionMatrix;
+    matrix_float4x4 modelViewMatrix;
+    
+    matrix_float4x4 modelMatrix;
+    matrix_float4x4 viewMatrix;
 }
 
 #pragma mark -
@@ -120,6 +117,8 @@ static const SimpleVertex3D cubeVertices[] = {
         _device = mtkView.device;
 
         mtkView.clearColor = MTLClearColorMake(1.0, 1.0, 1.0, 1.0);
+        
+        cubeVertexBuffer = [_device newBufferWithLength:sizeof(cubeVertexBuffer) options:MTLResourceCPUCacheModeDefaultCache];
         
 #pragma mark -
 #pragma mark Load texture from file
@@ -173,7 +172,7 @@ static const SimpleVertex3D cubeVertices[] = {
         // Set up next passes
         _renderToTextureRenderPassDescriptor_secondPass = [MTLRenderPassDescriptor new];
         _renderToTextureRenderPassDescriptor_secondPass.colorAttachments[0].texture = _renderTargetTexture;
-        _renderToTextureRenderPassDescriptor_secondPass.colorAttachments[0].loadAction = MTLLoadActionLoad;
+        _renderToTextureRenderPassDescriptor_secondPass.colorAttachments[0].loadAction = MTLLoadActionClear;
         _renderToTextureRenderPassDescriptor_secondPass.colorAttachments[0].storeAction = MTLStoreActionStore;
         
 
@@ -218,24 +217,20 @@ static const SimpleVertex3D cubeVertices[] = {
 - (void)mtkView:(nonnull MTKView *)view drawableSizeWillChange:(CGSize)size
 {
     _aspectRatio = size.width / (float)size.height;
-    _projectionMatrix = matrix_perspective_right_hand(65.0f * (M_PI / 180.0f), _aspectRatio, 0.1f, 100.0f);
+    _projectionMatrix = matrix_perspective_right_hand(45.0f * (M_PI / 180.0f), _aspectRatio, 0.1f, 100.0f);
 }
 
-- (void)_updateGameState
+// Set up projection, translation and rotation matrices
+- (void)projection_3D
 {
-    /// Update any game state before encoding renderint commands to our drawable
-
-    Uniforms *uniforms = NULL;
-
-    uniforms->projectionMatrix = _projectionMatrix;
-
+    
     vector_float3 rotationAxis = {1, 1, 0};
-    matrix_float4x4 modelMatrix = matrix4x4_rotation(_rotation, rotationAxis);
-    matrix_float4x4 viewMatrix = matrix4x4_translation(0.0, 0.0, -8.0);
+    modelMatrix = matrix4x4_rotation(_rotation, rotationAxis);
+    viewMatrix = matrix4x4_translation(0.0, 0.0, -3.0);
 
-    uniforms->modelViewMatrix = matrix_multiply(viewMatrix, modelMatrix);
+    modelViewMatrix = matrix_multiply(viewMatrix, modelMatrix);
+    _rotation += 0.01;
 
-    _rotation += .01;
 }
 
 // Handles view rendering for a new frame.
@@ -244,6 +239,7 @@ static const SimpleVertex3D cubeVertices[] = {
 
     id<MTLCommandBuffer> commandBuffer = [_commandQueue commandBuffer];
     commandBuffer.label = @"Command Buffer";
+    
     
     // Global coordinates for full screen render
     static const TextureVertex quadVertices[] =
@@ -260,12 +256,28 @@ static const SimpleVertex3D cubeVertices[] = {
     
     {
         id<MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:_renderToTextureRenderPassDescriptor_secondPass];
+        
+        [self projection_3D];
+        
         renderEncoder.label = @"Offscreen render shader pass";
         [renderEncoder setRenderPipelineState:_renderToTextureSimpleRenderPipeline];
+        [renderEncoder setCullMode:MTLCullModeFront];
         
         [renderEncoder setVertexBytes:&cubeVertices
                                length:sizeof(cubeVertices)
                               atIndex:VertexInputIndexVertices];
+        
+        [renderEncoder setVertexBytes:&_projectionMatrix
+                               length:sizeof(_projectionMatrix)
+                              atIndex:1];
+        
+        [renderEncoder setVertexBytes:&modelViewMatrix
+                               length:sizeof(modelViewMatrix)
+                              atIndex:2];
+        
+        [renderEncoder setVertexBytes:&modelMatrix
+                               length:sizeof(modelMatrix)
+                              atIndex:3];
         
         [renderEncoder drawPrimitives:MTLPrimitiveTypeTriangle
                           vertexStart:0
@@ -285,6 +297,7 @@ static const SimpleVertex3D cubeVertices[] = {
             renderEncoder.label = @"Drawable Render Pass shader final";
             
             [renderEncoder setRenderPipelineState:_drawableRenderPipeline];
+            
             
             [renderEncoder setVertexBytes:&quadVertices
                                    length:sizeof(quadVertices)

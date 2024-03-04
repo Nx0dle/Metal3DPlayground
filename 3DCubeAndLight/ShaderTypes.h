@@ -39,6 +39,7 @@ typedef struct
 {
     vector_float4 position;
     vector_float4 color;
+    vector_float3 normal;
 } SimpleVertex3D;
 
 typedef struct
