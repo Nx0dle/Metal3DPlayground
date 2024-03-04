@@ -107,6 +107,8 @@ static const SimpleVertex3D cubeVertices[] = {
     float _rotationY;
     
     float scaleZ;
+    
+    float rotationLight;
 }
 
 #pragma mark -
@@ -240,7 +242,6 @@ static const SimpleVertex3D cubeVertices[] = {
     viewMatrix = matrix4x4_translation(0.0, 0.0, -3.0 + scaleZ);
 
     modelViewMatrix = matrix_multiply(viewMatrix, modelMatrix);
-    _rotation += 0.01;
 
 }
 
@@ -286,6 +287,7 @@ static const SimpleVertex3D cubeVertices[] = {
         renderEncoder.label = @"Offscreen render shader pass";
         [renderEncoder setRenderPipelineState:_renderToTextureSimpleRenderPipeline];
         [renderEncoder setCullMode:MTLCullModeFront];
+        [renderEncoder setFragmentTexture:_textureFromFile atIndex:0];
         
         [renderEncoder setVertexBytes:&cubeVertices
                                length:sizeof(cubeVertices)
@@ -302,6 +304,12 @@ static const SimpleVertex3D cubeVertices[] = {
         [renderEncoder setVertexBytes:&modelMatrix
                                length:sizeof(modelMatrix)
                               atIndex:3];
+        
+        [renderEncoder setFragmentBytes:&rotationLight
+                                 length:sizeof(rotationLight)
+                                atIndex:4];
+        
+        rotationLight += 0.05;
         
         [renderEncoder drawPrimitives:MTLPrimitiveTypeTriangle
                           vertexStart:0

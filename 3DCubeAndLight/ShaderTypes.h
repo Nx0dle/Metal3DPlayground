@@ -46,6 +46,7 @@ typedef struct
 {
     vector_float4 position;
     vector_float2 texcoord;
+    vector_float3 normal;
 } TextureVertex3D;
 
 typedef struct
