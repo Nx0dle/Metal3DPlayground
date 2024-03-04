@@ -37,9 +37,11 @@
     _view.delegate = _renderer;
 }
 
-- (void)keyDown:(NSEvent *)event
+- (void)mouseDragged:(NSEvent *)event
 {
-    
+    printf("%s: %f %f\n", __func__, [event deltaX], [event deltaY]);
+    [_renderer setRotationX:[event deltaX] Y:[event deltaY]];
+    [_view setNeedsDisplay:YES];
 }
 
 @end

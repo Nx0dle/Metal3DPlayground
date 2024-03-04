@@ -13,5 +13,6 @@
 
 -(nonnull instancetype)initWithMetalKitView:(nonnull MTKView *)view;
 
+- (void)setRotationX:(float)posX Y:(float)posY;
 @end
 

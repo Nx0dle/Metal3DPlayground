@@ -102,6 +102,9 @@ static const SimpleVertex3D cubeVertices[] = {
     
     matrix_float4x4 modelMatrix;
     matrix_float4x4 viewMatrix;
+    
+    float _rotationX;
+    float _rotationY;
 }
 
 #pragma mark -
@@ -224,13 +227,25 @@ static const SimpleVertex3D cubeVertices[] = {
 - (void)projection_3D
 {
     
-    vector_float3 rotationAxis = {1, 1, 0};
-    modelMatrix = matrix4x4_rotation(_rotation, rotationAxis);
+    vector_float3 rotationAxisX = {1, 0, 0};
+    matrix_float4x4 modelMatrixX = matrix4x4_rotation(_rotationX, rotationAxisX);
+
+    vector_float3 rotationAxisY = {0, 1, 0};
+    matrix_float4x4 modelMatrixY = matrix4x4_rotation(_rotationY, rotationAxisY);
+    
+    modelMatrix = matrix_multiply(modelMatrixX, modelMatrixY);
     viewMatrix = matrix4x4_translation(0.0, 0.0, -3.0);
 
     modelViewMatrix = matrix_multiply(viewMatrix, modelMatrix);
     _rotation += 0.01;
 
+}
+
+- (void)setRotationX:(float)posX Y:(float)posY
+{
+    float mult = 0.01;
+    _rotationX += posY * mult;
+    _rotationY += posX * mult;
 }
 
 // Handles view rendering for a new frame.
