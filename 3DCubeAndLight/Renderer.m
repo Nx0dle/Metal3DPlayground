@@ -120,7 +120,7 @@ static const TextureVertex3D cubeVertices[] = {
 }
 
 #pragma mark -
-#pragma mark Settings and pipelines
+#pragma mark Init objects
 
 - (nonnull instancetype)initWithMetalKitView:(nonnull MTKView *)mtkView
 {
@@ -138,7 +138,7 @@ static const TextureVertex3D cubeVertices[] = {
         rotationLight = 0.0;
         
 #pragma mark -
-#pragma mark Load texture from file
+#pragma mark Load texture from assets
         
         {
             MTKTextureLoader* textureLoader = [[MTKTextureLoader alloc] initWithDevice:_device];
@@ -149,7 +149,7 @@ static const TextureVertex3D cubeVertices[] = {
               MTKTextureLoaderOptionTextureStorageMode : @(MTLStorageModePrivate)
               };
 
-            _textureFromFile = [textureLoader newTextureWithName:@"ColorMap"
+            _textureFromFile = [textureLoader newTextureWithName:@"Image"
                                               scaleFactor:1.0
                                                    bundle:nil
                                                   options:textureLoaderOptions
@@ -162,7 +162,7 @@ static const TextureVertex3D cubeVertices[] = {
         }
         
 #pragma mark -
-#pragma mark Set up command queue
+#pragma mark Settings and pipelines
 
         _commandQueue = [_device newCommandQueue];
 
@@ -305,7 +305,7 @@ static const TextureVertex3D cubeVertices[] = {
                                  length:sizeof(rotationLight)
                                 atIndex:8];
         
-        rotationLight += 0.01;
+        rotationLight += 0.0;
         
         [renderEncoder drawPrimitives:MTLPrimitiveTypeTriangle
                           vertexStart:0

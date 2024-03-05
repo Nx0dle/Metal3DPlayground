@@ -163,7 +163,7 @@ fragment float4 phongLight(TexturePipelineRasterizerData in [[stage_in]],
     
     float4 reflectDir = reflect(in.lightVector, in.normalData);
     
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 128);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
     float3 specular = specularStrength * spec * lightColor;
 
     float3 finalColor = (ambient + diffuse + specular) * colorSample;
