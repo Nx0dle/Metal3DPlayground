@@ -6,61 +6,68 @@
 #pragma mark-
 #pragma mark Define vertices
 
-static const SimpleVertex triVertices[] = {
-    // position    // color
-    {{ 0.5,  0.5}, {1.0, 0.0, 1.0, 1.0}},
-    {{ 0.5, -0.5}, {1.0, 0.0, 1.0, 1.0}},
-    {{-0.5, -0.5}, {1.0, 0.0, 1.0, 1.0}},
+// Global coordinates for full screen render
+static const TextureVertex quadVertices[] =
+{
+    // Positions     , Texture coordinates
+    { {  1.0,  -1.0 },  { 1.0, 1.0 } },
+    { { -1.0,  -1.0 },  { 0.0, 1.0 } },
+    { { -1.0,   1.0 },  { 0.0, 0.0 } },
+
+    { {  1.0,  -1.0 },  { 1.0, 1.0 } },
+    { { -1.0,   1.0 },  { 0.0, 0.0 } },
+    { {  1.0,   1.0 },  { 1.0, 0.0 } },
 };
 
-static const SimpleVertex3D cubeVertices[] = {
+static const TextureVertex3D cubeVertices[] = {
+    // Position             // Texcoord  // Normal  // Tangent  // Bitangent
     // Front face
-    {{-0.5, -0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}, {0, 0, 1}},
-    {{ 0.5, -0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}, {0, 0, 1}},
-    {{ 0.5,  0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}, {0, 0, 1}},
-    {{ 0.5,  0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}, {0, 0, 1}},
-    {{-0.5,  0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}, {0, 0, 1}},
-    {{-0.5, -0.5,  0.5, 1.0}, {1.0, 0.0, 0.0, 1.0}, {0, 0, 1}},
+    {{-0.5, -0.5,  0.5, 1.0}, {0.0, 1.0}, {0, 0, 1}, {1, 0, 0}, {0, 1, 0}},
+    {{ 0.5, -0.5,  0.5, 1.0}, {1.0, 1.0}, {0, 0, 1}, {1, 0, 0}, {0, 1, 0}},
+    {{ 0.5,  0.5,  0.5, 1.0}, {1.0, 0.0}, {0, 0, 1}, {1, 0, 0}, {0, 1, 0}},
+    {{ 0.5,  0.5,  0.5, 1.0}, {1.0, 0.0}, {0, 0, 1}, {1, 0, 0}, {0, 1, 0}},
+    {{-0.5,  0.5,  0.5, 1.0}, {0.0, 0.0}, {0, 0, 1}, {1, 0, 0}, {0, 1, 0}},
+    {{-0.5, -0.5,  0.5, 1.0}, {0.0, 1.0}, {0, 0, 1}, {1, 0, 0}, {0, 1, 0}},
 
     // Back face
-    {{ 0.5, -0.5, -0.5, 1.0}, {1.0, 1.0, 0.0, 1.0}, {0, 0, -1}},
-    {{-0.5, -0.5, -0.5, 1.0}, {1.0, 1.0, 0.0, 1.0}, {0, 0, -1}},
-    {{-0.5,  0.5, -0.5, 1.0}, {1.0, 1.0, 0.0, 1.0}, {0, 0, -1}},
-    {{-0.5,  0.5, -0.5, 1.0}, {1.0, 1.0, 0.0, 1.0}, {0, 0, -1}},
-    {{ 0.5,  0.5, -0.5, 1.0}, {1.0, 1.0, 0.0, 1.0}, {0, 0, -1}},
-    {{ 0.5, -0.5, -0.5, 1.0}, {1.0, 1.0, 0.0, 1.0}, {0, 0, -1}},
+    {{ 0.5, -0.5, -0.5, 1.0}, {0.0, 1.0}, {0, 0, -1}, {-1, 0, 0}, {0, 1, 0}},
+    {{-0.5, -0.5, -0.5, 1.0}, {1.0, 1.0}, {0, 0, -1}, {-1, 0, 0}, {0, 1, 0}},
+    {{-0.5,  0.5, -0.5, 1.0}, {1.0, 0.0}, {0, 0, -1}, {-1, 0, 0}, {0, 1, 0}},
+    {{-0.5,  0.5, -0.5, 1.0}, {1.0, 0.0}, {0, 0, -1}, {-1, 0, 0}, {0, 1, 0}},
+    {{ 0.5,  0.5, -0.5, 1.0}, {0.0, 0.0}, {0, 0, -1}, {-1, 0, 0}, {0, 1, 0}},
+    {{ 0.5, -0.5, -0.5, 1.0}, {0.0, 1.0}, {0, 0, -1}, {-1, 0, 0}, {0, 1, 0}},
 
     // Top face
-    {{-0.5,  0.5,  0.5, 1.0}, {1.0, 0.0, 1.0, 1.0}, {0, 1, 0}},
-    {{ 0.5,  0.5,  0.5, 1.0}, {1.0, 0.0, 1.0, 1.0}, {0, 1, 0}},
-    {{ 0.5,  0.5, -0.5, 1.0}, {1.0, 0.0, 1.0, 1.0}, {0, 1, 0}},
-    {{ 0.5,  0.5, -0.5, 1.0}, {1.0, 0.0, 1.0, 1.0}, {0, 1, 0}},
-    {{-0.5,  0.5, -0.5, 1.0}, {1.0, 0.0, 1.0, 1.0}, {0, 1, 0}},
-    {{-0.5,  0.5,  0.5, 1.0}, {1.0, 0.0, 1.0, 1.0}, {0, 1, 0}},
+    {{-0.5,  0.5,  0.5, 1.0}, {0.0, 1.0}, {0, 1, 0}, {1, 0, 0}, {0, 0, -1}},
+    {{ 0.5,  0.5,  0.5, 1.0}, {1.0, 1.0}, {0, 1, 0}, {1, 0, 0}, {0, 0, -1}},
+    {{ 0.5,  0.5, -0.5, 1.0}, {1.0, 0.0}, {0, 1, 0}, {1, 0, 0}, {0, 0, -1}},
+    {{ 0.5,  0.5, -0.5, 1.0}, {1.0, 0.0}, {0, 1, 0}, {1, 0, 0}, {0, 0, -1}},
+    {{-0.5,  0.5, -0.5, 1.0}, {0.0, 0.0}, {0, 1, 0}, {1, 0, 0}, {0, 0, -1}},
+    {{-0.5,  0.5,  0.5, 1.0}, {0.0, 1.0}, {0, 1, 0}, {1, 0, 0}, {0, 0, -1}},
 
     // Bottom face
-    {{-0.5, -0.5, -0.5, 1.0}, {0.0, 1.0, 0.0, 1.0}, {0, -1, 0}},
-    {{ 0.5, -0.5, -0.5, 1.0}, {0.0, 1.0, 0.0, 1.0}, {0, -1, 0}},
-    {{ 0.5, -0.5,  0.5, 1.0}, {0.0, 1.0, 0.0, 1.0}, {0, -1, 0}},
-    {{ 0.5, -0.5,  0.5, 1.0}, {0.0, 1.0, 0.0, 1.0}, {0, -1, 0}},
-    {{-0.5, -0.5,  0.5, 1.0}, {0.0, 1.0, 0.0, 1.0}, {0, -1, 0}},
-    {{-0.5, -0.5, -0.5, 1.0}, {0.0, 1.0, 0.0, 1.0}, {0, -1, 0}},
+    {{-0.5, -0.5, -0.5, 1.0}, {0.0, 1.0}, {0, -1, 0}, {1, 0, 0}, {0, 0, 1}},
+    {{ 0.5, -0.5, -0.5, 1.0}, {1.0, 1.0}, {0, -1, 0}, {1, 0, 0}, {0, 0, 1}},
+    {{ 0.5, -0.5,  0.5, 1.0}, {1.0, 0.0}, {0, -1, 0}, {1, 0, 0}, {0, 0, 1}},
+    {{ 0.5, -0.5,  0.5, 1.0}, {1.0, 0.0}, {0, -1, 0}, {1, 0, 0}, {0, 0, 1}},
+    {{-0.5, -0.5,  0.5, 1.0}, {0.0, 0.0}, {0, -1, 0}, {1, 0, 0}, {0, 0, 1}},
+    {{-0.5, -0.5, -0.5, 1.0}, {0.0, 1.0}, {0, -1, 0}, {1, 0, 0}, {0, 0, 1}},
 
     // Left face
-    {{-0.5, -0.5, -0.5, 1.0}, {1.0, 1.0, 1.0, 1.0}, {-1, 0, 0}},
-    {{-0.5, -0.5,  0.5, 1.0}, {1.0, 1.0, 1.0, 1.0}, {-1, 0, 0}},
-    {{-0.5,  0.5,  0.5, 1.0}, {1.0, 1.0, 1.0, 1.0}, {-1, 0, 0}},
-    {{-0.5,  0.5,  0.5, 1.0}, {1.0, 1.0, 1.0, 1.0}, {-1, 0, 0}},
-    {{-0.5,  0.5, -0.5, 1.0}, {1.0, 1.0, 1.0, 1.0}, {-1, 0, 0}},
-    {{-0.5, -0.5, -0.5, 1.0}, {1.0, 1.0, 1.0, 1.0}, {-1, 0, 0}},
+    {{-0.5, -0.5, -0.5, 1.0}, {0.0, 1.0}, {-1, 0, 0}, {0, 0, 1}, {0, 1, 0}},
+    {{-0.5, -0.5,  0.5, 1.0}, {1.0, 1.0}, {-1, 0, 0}, {0, 0, 1}, {0, 1, 0}},
+    {{-0.5,  0.5,  0.5, 1.0}, {1.0, 0.0}, {-1, 0, 0}, {0, 0, 1}, {0, 1, 0}},
+    {{-0.5,  0.5,  0.5, 1.0}, {1.0, 0.0}, {-1, 0, 0}, {0, 0, 1}, {0, 1, 0}},
+    {{-0.5,  0.5, -0.5, 1.0}, {0.0, 0.0}, {-1, 0, 0}, {0, 0, 1}, {0, 1, 0}},
+    {{-0.5, -0.5, -0.5, 1.0}, {0.0, 1.0}, {-1, 0, 0}, {0, 0, 1}, {0, 1, 0}},
 
     // Right face
-    {{ 0.5, -0.5,  0.5, 1.0}, {0.0, 1.0, 1.0, 1.0}, {1, 0, 0}},
-    {{ 0.5, -0.5, -0.5, 1.0}, {0.0, 1.0, 1.0, 1.0}, {1, 0, 0}},
-    {{ 0.5,  0.5, -0.5, 1.0}, {0.0, 1.0, 1.0, 1.0}, {1, 0, 0}},
-    {{ 0.5,  0.5, -0.5, 1.0}, {0.0, 1.0, 1.0, 1.0}, {1, 0, 0}},
-    {{ 0.5,  0.5,  0.5, 1.0}, {0.0, 1.0, 1.0, 1.0}, {1, 0, 0}},
-    {{ 0.5, -0.5,  0.5, 1.0}, {0.0, 1.0, 1.0, 1.0}, {1, 0, 0}},
+    {{ 0.5, -0.5,  0.5, 1.0}, {0.0, 1.0}, {1, 0, 0}, {0, 0, -1}, {0, 1, 0}},
+    {{ 0.5, -0.5, -0.5, 1.0}, {1.0, 1.0}, {1, 0, 0}, {0, 0, -1}, {0, 1, 0}},
+    {{ 0.5,  0.5, -0.5, 1.0}, {1.0, 0.0}, {1, 0, 0}, {0, 0, -1}, {0, 1, 0}},
+    {{ 0.5,  0.5, -0.5, 1.0}, {1.0, 0.0}, {1, 0, 0}, {0, 0, -1}, {0, 1, 0}},
+    {{ 0.5,  0.5,  0.5, 1.0}, {0.0, 0.0}, {1, 0, 0}, {0, 0, -1}, {0, 1, 0}},
+    {{ 0.5, -0.5,  0.5, 1.0}, {0.0, 1.0}, {1, 0, 0}, {0, 0, -1}, {0, 1, 0}},
 };
 
 #pragma mark-
@@ -72,6 +79,7 @@ static const SimpleVertex3D cubeVertices[] = {
     // Texture to render to and then sample from.
     id<MTLTexture> _renderTargetTexture;
     id<MTLTexture> _textureFromFile;
+    id<MTLTexture> _textureNormalFromFile;
 
     // Render pass descriptors to draw to the texture
     MTLRenderPassDescriptor* _renderToTextureRenderPassDescriptor_FBO;
@@ -126,6 +134,8 @@ static const SimpleVertex3D cubeVertices[] = {
         mtkView.clearColor = MTLClearColorMake(1.0, 1.0, 1.0, 1.0);
         
         cubeVertexBuffer = [_device newBufferWithLength:sizeof(cubeVertexBuffer) options:MTLResourceCPUCacheModeDefaultCache];
+        
+        rotationLight = 0.0;
         
 #pragma mark -
 #pragma mark Load texture from file
@@ -198,8 +208,8 @@ static const SimpleVertex3D cubeVertices[] = {
         
         pipelineStateDescriptor.label = @"Offscreen Render texture render pipeline";
         pipelineStateDescriptor.rasterSampleCount = 1;
-        pipelineStateDescriptor.vertexFunction =  [defaultLibrary newFunctionWithName:@"simpleVertexShader"];
-        pipelineStateDescriptor.fragmentFunction =  [defaultLibrary newFunctionWithName:@"simpleFragmentShader"];
+        pipelineStateDescriptor.vertexFunction =  [defaultLibrary newFunctionWithName:@"textureVertexShader3D"];
+        pipelineStateDescriptor.fragmentFunction =  [defaultLibrary newFunctionWithName:@"phongLight"];
         pipelineStateDescriptor.colorAttachments[0].pixelFormat = _renderTargetTexture.pixelFormat;
         _renderToTextureSimpleRenderPipeline = [_device newRenderPipelineStateWithDescriptor:pipelineStateDescriptor error:&error];
         NSAssert(_renderToTextureSimpleRenderPipeline, @"Failed to create pipeline state to render to screen: %@", error);
@@ -265,20 +275,6 @@ static const SimpleVertex3D cubeVertices[] = {
     id<MTLCommandBuffer> commandBuffer = [_commandQueue commandBuffer];
     commandBuffer.label = @"Command Buffer";
     
-    
-    // Global coordinates for full screen render
-    static const TextureVertex quadVertices[] =
-    {
-        // Positions     , Texture coordinates
-        { {  1.0,  -1.0 },  { 1.0, 1.0 } },
-        { { -1.0,  -1.0 },  { 0.0, 1.0 } },
-        { { -1.0,   1.0 },  { 0.0, 0.0 } },
-
-        { {  1.0,  -1.0 },  { 1.0, 1.0 } },
-        { { -1.0,   1.0 },  { 0.0, 0.0 } },
-        { {  1.0,   1.0 },  { 1.0, 0.0 } },
-    };
-    
     {
         id<MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:_renderToTextureRenderPassDescriptor_secondPass];
         
@@ -295,21 +291,21 @@ static const SimpleVertex3D cubeVertices[] = {
         
         [renderEncoder setVertexBytes:&_projectionMatrix
                                length:sizeof(_projectionMatrix)
-                              atIndex:1];
+                              atIndex:5];
         
         [renderEncoder setVertexBytes:&modelViewMatrix
                                length:sizeof(modelViewMatrix)
-                              atIndex:2];
+                              atIndex:6];
         
         [renderEncoder setVertexBytes:&modelMatrix
                                length:sizeof(modelMatrix)
-                              atIndex:3];
+                              atIndex:7];
         
         [renderEncoder setFragmentBytes:&rotationLight
                                  length:sizeof(rotationLight)
-                                atIndex:4];
+                                atIndex:8];
         
-        rotationLight += 0.05;
+        rotationLight += 0.01;
         
         [renderEncoder drawPrimitives:MTLPrimitiveTypeTriangle
                           vertexStart:0

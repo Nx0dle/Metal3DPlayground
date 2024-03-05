@@ -37,7 +37,6 @@ simpleVertexShader(const uint vertexID [[ vertex_id ]],
 {
     SimplePipelineRasterizerData out;
     
-    out.lightPosition = float4(1, 1, 0, 1);
     out.positionWorld = modelMatrix * vertices[vertexID].position;
     
     float4 normalData = normalize(float4(vertices[vertexID].normal, 0.0));
@@ -78,13 +77,9 @@ fragment float4 simpleFragmentShader(SimplePipelineRasterizerData in [[stage_in]
     float spec = pow(max(dot(viewDir, in.reflectDirection), 0.0), 256);
     float4 specular = specularStrength * spec * lightColor;
 
-    
-    
     float4 finalColor = in.color * (ambient + diffuse + specular);
     
-    in.color = finalColor;
-    
-    return in.color;
+    return finalColor;
 }
 
 #pragma mark -
@@ -99,8 +94,9 @@ struct TexturePipelineRasterizerData
     float4 normalData;
     float4 lightVector;
     float4 lightPosition;
-    float4 reflectDirection;
     float4 positionWorld;
+    float4 tangent;
+    float4 bitangent;
 };
 
 
@@ -125,16 +121,11 @@ textureVertexShader3D(const uint vertexID [[ vertex_id ]],
 
     out.texcoord = vertices[vertexID].texcoord;
 
-    out.lightPosition = float4(1, 1, 0, 1);
     out.positionWorld = modelMatrix * vertices[vertexID].position;
     
     float4 normalData = normalize(float4(vertices[vertexID].normal, 0.0));
     
     out.normalData = modelMatrix * normalData;
-    
-    float4 reflectDir = reflect(out.lightVector, normalData);
-    
-    out.reflectDirection = reflectDir;
     
     float4 position = float4(vertices[vertexID].position.xyz, 1.0);
     out.position = _projectionMatrix * modelViewMatrix * position;
@@ -152,33 +143,32 @@ fragment float4 phongLight(TexturePipelineRasterizerData in [[stage_in]],
  
     sampler simpleSampler;
     
-    float4 colorSample = texture.sample(simpleSampler, in.texcoord);
+    float3 colorSample = texture.sample(simpleSampler, in.texcoord).rgb;
     
     float ambientStrength = 0.2;
     float specularStrength = 0.5;
     
-    float radius = 1;
+    float radius = 1.2;
     
     float4 lightPosition = float4(radius * sin(rotationLight), 0, radius * cos(rotationLight), 1);
     
     in.lightVector = normalize(lightPosition - in.positionWorld);
     float brightness = (dot(in.normalData, in.lightVector));
 
-    float4 lightColor = float4(1, 1, 1, 1);
-    float4 ambient = ambientStrength * lightColor;
-    float4 diffuse = brightness * lightColor;
+    float3 lightColor = float3(1, 1, 1);
+    float3 ambient = ambientStrength * lightColor;
+    float3 diffuse = brightness * lightColor;
     
-    float4 viewDir = normalize(0 - in.position);
-    float spec = pow(max(dot(viewDir, in.reflectDirection), 0.0), 256);
-    float4 specular = specularStrength * spec * lightColor;
+    float4 viewDir = float4(0.0, 0.0, -1.0, 1.0);
+    
+    float4 reflectDir = reflect(in.lightVector, in.normalData);
+    
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 128);
+    float3 specular = specularStrength * spec * lightColor;
 
+    float3 finalColor = (ambient + diffuse + specular) * colorSample;
     
-    
-    float4 finalColor = colorSample * (ambient + diffuse + specular);
-    
-    colorSample = finalColor;
-    
-    return colorSample;
+    return float4(finalColor, 1.0);
 }
 
 vertex TexturePipelineRasterizerData
