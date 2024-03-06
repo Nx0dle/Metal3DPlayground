@@ -123,9 +123,9 @@ textureVertexShader3D(const uint vertexID [[ vertex_id ]],
 
     out.positionWorld = modelMatrix * vertices[vertexID].position;
     
-    float4 normalData = normalize(float4(vertices[vertexID].normal, 0.0));
-    
-    out.normalData = modelMatrix * normalData;
+    out.normalData = modelViewMatrix * normalize(float4(vertices[vertexID].normal, 0.0));
+    out.tangent = modelViewMatrix * normalize(float4(vertices[vertexID].tangent, 0.0));
+    out.bitangent = modelViewMatrix * normalize(float4(vertices[vertexID].bitangent, 0.0));
     
     float4 position = float4(vertices[vertexID].position.xyz, 1.0);
     out.position = _projectionMatrix * modelViewMatrix * position;
@@ -143,7 +143,20 @@ fragment float4 phongLight(TexturePipelineRasterizerData in [[stage_in]],
  
     sampler simpleSampler;
     
-    float3 colorSample = texture.sample(simpleSampler, in.texcoord).rgb;
+    float3 colorSample = texture.sample(simpleSampler, in.texcoord * 0.5).rgb;
+    float3 colorSampleNormal = texture.sample(simpleSampler, in.texcoord * 0.5 + 0.5).rgb;
+    colorSampleNormal = pow(colorSampleNormal, 1/2.3);
+    
+    float3 normalSample = colorSampleNormal * 2 - 1;
+    
+    float3 normalRed = float3(in.tangent) * normalSample.r;
+    float3 normalGreen = float3(in.bitangent) * normalSample.g;
+    float3 normalBlue = float3(in.normalData) * normalSample.b;
+    
+    float3 newNormalMap = normalize(normalRed + normalGreen + normalBlue);
+    
+//    return float4(newNormalMap * 0.5 + 0.5, 1.);
+    
     
     float ambientStrength = 0.2;
     float specularStrength = 0.5;
@@ -153,17 +166,17 @@ fragment float4 phongLight(TexturePipelineRasterizerData in [[stage_in]],
     float4 lightPosition = float4(radius * sin(rotationLight), 0, radius * cos(rotationLight), 1);
     
     in.lightVector = normalize(lightPosition - in.positionWorld);
-    float brightness = (dot(in.normalData, in.lightVector));
+    float brightness = (dot(float4(newNormalMap, 0.0), in.lightVector));
 
     float3 lightColor = float3(1, 1, 1);
     float3 ambient = ambientStrength * lightColor;
-    float3 diffuse = brightness * lightColor;
+    float3 diffuse = lightColor * brightness;
     
-    float4 viewDir = float4(0.0, 0.0, -1.0, 1.0);
+    float3 viewDir = float3(0.0, 0.0, 0.0) - float3(in.positionWorld);
     
-    float4 reflectDir = reflect(in.lightVector, in.normalData);
+    float3 reflectDir = reflect(float3(in.lightVector), newNormalMap);
     
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 2);
     float3 specular = specularStrength * spec * lightColor;
 
     float3 finalColor = (ambient + diffuse + specular) * colorSample;

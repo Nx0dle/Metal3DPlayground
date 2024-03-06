@@ -145,11 +145,13 @@ static const TextureVertex3D cubeVertices[] = {
 
             NSDictionary *textureLoaderOptions =
             @{
+              MTKTextureLoaderOptionSRGB               : @(false),
+              MTKTextureLoaderOptionGenerateMipmaps    : @(false),
               MTKTextureLoaderOptionTextureUsage       : @(MTLTextureUsageShaderRead),
               MTKTextureLoaderOptionTextureStorageMode : @(MTLStorageModePrivate)
               };
 
-            _textureFromFile = [textureLoader newTextureWithName:@"Image"
+            _textureFromFile = [textureLoader newTextureWithName:@"ColorMap"
                                               scaleFactor:1.0
                                                    bundle:nil
                                                   options:textureLoaderOptions
